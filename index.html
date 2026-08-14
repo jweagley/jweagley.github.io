@@ -1,47 +1,135 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>My Test Page</title>
-<style>
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-    background: #f5f5f7;
-    color: #1d1d1f;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    margin: 0;
-  }
-  .card {
-    background: white;
-    padding: 3rem;
-    border-radius: 16px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-    text-align: center;
-    max-width: 480px;
-  }
-  h1 {
-    margin-top: 0;
-  }
-  .badge {
-    display: inline-block;
-    background: #eef3ff;
-    color: #2563eb;
-    padding: 0.25rem 0.75rem;
-    border-radius: 999px;
-    font-size: 0.85rem;
-    margin-bottom: 1rem;
-  }
-</style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JD Weagley, Ed.D. — Instructional Designer & Researcher</title>
+  <meta name="description" content="Professional portfolio of JD Weagley, Ed.D.: research, presentations, code, and instructional design in higher education." />
+  <link rel="stylesheet" href="assets/css/styles.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
 </head>
 <body>
-  <div class="card">
-    <div class="badge">It's working!</div>
-    <h1>Hello, world 👋</h1>
-    <p>This is a simple test page, ready to publish with GitHub Pages.</p>
-  </div>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="index.html">JD Weagley, Ed.D.</a>
+        <div class="nav-right">
+          <ul class="nav-links" id="nav-links">
+            <li><a href="index.html" class="active">About</a></li>
+            <li><a href="research.html">Research &amp; Presentations</a></li>
+            <li><a href="instructional-design.html">Instructional Design</a></li>
+            <li><a href="code.html">Code</a></li>
+          </ul>
+          <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle color theme">☾</button>
+          <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle menu">☰</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="container hero-grid">
+        <div>
+          <p class="hero-eyebrow">Instructional Designer · Researcher</p>
+          <h1>JD Weagley, Ed.D.</h1>
+          <p class="lead">
+            I design learning experiences and study how emerging technologies reshape
+            teaching and learning in higher education. This site collects my research,
+            presentations, code, and instructional design work.
+          </p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="research.html">View my research</a>
+            <a class="btn btn-ghost" href="mailto:jweagley@purdue.edu">Get in touch</a>
+          </div>
+        </div>
+        <!-- Replace with your photo: assets/img/headshot.jpg -->
+        <img class="avatar" src="assets/img/headshot.jpg" alt="Portrait of JD Weagley"
+             onerror="this.style.visibility='hidden'" />
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section class="section-soft">
+      <div class="container">
+        <h2 class="section-title">About me</h2>
+        <div class="prose">
+          <p>
+            <span class="placeholder">Replace this with 2–3 short paragraphs.</span>
+            Introduce who you are, your role and institution, and the through-line of your
+            work. For example: your background in instructional design, the questions that
+            drive your research, and the kinds of learners and courses you support.
+          </p>
+          <p>
+            Mention your current focus — e.g., how generative AI is changing the practice
+            and professional identity of instructional designers — and what you care about
+            in good learning design.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOCUS AREAS -->
+    <section>
+      <div class="container">
+        <h2 class="section-title">What I work on</h2>
+        <p class="section-sub">A quick map of the four areas you'll find on this site.</p>
+        <div class="card-grid">
+          <article class="card">
+            <h3>Research</h3>
+            <p>Peer-reviewed and in-progress scholarship on AI, learning, and design in higher education.</p>
+            <a href="research.html">Explore research &amp; talks →</a>
+          </article>
+          <article class="card">
+            <h3>Presentations</h3>
+            <p>Conference sessions, invited talks, and workshops, with slides and recordings.</p>
+            <a href="research.html">See presentations →</a>
+          </article>
+          <article class="card">
+            <h3>Instructional Design</h3>
+            <p>Course designs, modules, and learning artifacts built with sound pedagogy.</p>
+            <a href="instructional-design.html">View ID samples →</a>
+          </article>
+          <article class="card">
+            <h3>Code</h3>
+            <p>Tools, prototypes, and analysis code developed to support learning and research.</p>
+            <a href="code.html">Browse code →</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT CALLOUT -->
+    <section class="section-soft">
+      <div class="container">
+        <div class="callout">
+          <h2>Let's connect</h2>
+          <p>Interested in collaborating, or want a copy of my CV? Reach out any time.</p>
+          <div class="btn-row">
+            <a class="btn btn-primary" href="mailto:jweagley@purdue.edu">Email me</a>
+            <a class="btn btn-ghost" href="assets/cv.pdf">Download CV (PDF)</a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <ul class="footer-links">
+        <li><a href="mailto:jweagley@purdue.edu">Email</a></li>
+        <li><a href="#" aria-label="LinkedIn (add your URL)">LinkedIn</a></li>
+        <li><a href="#" aria-label="ORCID (add your URL)">ORCID</a></li>
+        <li><a href="#" aria-label="Google Scholar (add your URL)">Google Scholar</a></li>
+        <li><a href="#" aria-label="GitHub (add your URL)">GitHub</a></li>
+      </ul>
+      <p class="footer-note">© <span id="year"></span> JD Weagley, Ed.D. Built with plain HTML &amp; CSS.</p>
+    </div>
+  </footer>
+
+  <script src="assets/js/main.js"></script>
 </body>
 </html>

@@ -6,9 +6,11 @@
   var $ = function (id) { return document.getElementById(id); };
 
   var calendar = null;      // { events, published, modified } from calendar-data.json
+  var addDrop = null;       // { sessions, short, modified } from adddrop-data.json
   var weeks = [];           // raw weeks from buildWeeks
   var breakOverride = {};   // week start (ms) -> true/false, set by the user
   var datesTouched = false; // stop auto-filling once the user edits dates
+  var shortPick = null;     // CRN chosen from the short-course lookup
   var logo = null;
   var termInfo = null;
 
@@ -22,12 +24,20 @@
 
   var OFFICIAL = '<a href="https://www.purdue.edu/registrar/calendars/academic/" target="_blank" rel="noopener">official calendar</a>';
 
-  // calendar-data.json is refreshed daily from the Registrar by a GitHub Action.
-  fetch("calendar-data.json", { cache: "no-cache" })
-    .then(function (r) {
+  function getJson(url) {
+    return fetch(url, { cache: "no-cache" }).then(function (r) {
       if (!r.ok) throw new Error("HTTP " + r.status);
       return r.json();
-    })
+    });
+  }
+
+  // Both files are refreshed daily from the Registrar by a GitHub Action.
+  // Add/Drop data (course-length dates, short courses) is optional.
+  var addDropLoad = getJson("adddrop-data.json")
+    .then(function (a) { addDrop = a; })
+    .catch(function () { addDrop = { sessions: [], short: {} }; });
+
+  getJson("calendar-data.json")
     .then(function (c) {
       calendar = c;
       var updated = c.modified && c.modified.official ? " Registrar page last updated " + S.fmtLong(S.parseInputDate(c.modified.official)).replace(/^\w+, /, "") + "." : "";
@@ -37,6 +47,7 @@
       calendar = { events: [], published: {}, modified: {} };
       setStatus("warn", "The Purdue calendar data couldn’t be loaded, so holidays won’t be marked. Check dates against the " + OFFICIAL + ".");
     })
+    .then(function () { return addDropLoad; })
     .then(function () {
       pickDefaultTerm();
       update();
@@ -73,9 +84,118 @@
       number: $("number").value.trim(),
       term: $("term").value,
       year: parseInt($("year").value, 10),
+      length: $("length").value,
       start: S.parseInputDate($("start").value),
       end: S.parseInputDate($("end").value)
     };
+  }
+
+  // ---------- Course lengths ----------
+
+  var ADD_DROP = '<a href="https://www.purdue.edu/registrar/calendars/add-drop/" target="_blank" rel="noopener">Add/Drop calendar</a>';
+
+  function termSessions(f) {
+    return addDrop.sessions.filter(function (s) { return s.term === f.term && s.year === f.year; });
+  }
+
+  function findSession(f, re) {
+    return termSessions(f).filter(function (s) { return re.test(s.label); })[0] || null;
+  }
+
+  function weeksLong(s) {
+    return (S.parseInputDate(s.end) - S.parseInputDate(s.start)) / S.DAY / 7;
+  }
+
+  // Options for the Course length menu: [value, label]
+  function lengthOptions(f) {
+    var opts = [];
+    if (f.term === "Fall" || f.term === "Spring") {
+      opts.push(["full", "16 weeks (full term)"], ["first8", "8 weeks: first half"], ["second8", "8 weeks: second half"]);
+    } else if (f.term === "Summer") {
+      var sevens = termSessions(f).filter(function (s) { return /seven|7[- ]?week/i.test(s.label) || (weeksLong(s) > 6.2 && weeksLong(s) < 7.8); });
+      if (sevens.length) sevens.forEach(function (s, i) { opts.push(["seven:" + i, "7 weeks: " + s.label]); });
+      else opts.push(["seven", "7 weeks"]);
+    } else {
+      opts.push(["full", "Full term"]);
+    }
+    opts.push(["short", "Short course (look up by course number)"], ["manual", "Other (enter dates)"]);
+    return opts;
+  }
+
+  function syncLengthMenu(f) {
+    var sel = $("length");
+    var opts = lengthOptions(f);
+    var key = opts.map(function (o) { return o[0]; }).join("|");
+    if (sel.dataset.key !== key) {
+      var prev = sel.value;
+      sel.innerHTML = opts.map(function (o) { return '<option value="' + o[0] + '">' + esc(o[1]) + "</option>"; }).join("");
+      sel.dataset.key = key;
+      if (opts.some(function (o) { return o[0] === prev; })) sel.value = prev;
+    }
+    return sel.value;
+  }
+
+  // "GRAD 589/588" -> ["GRAD58900", "GRAD58800"]; "GRAD50200" -> ["GRAD50200"]
+  function courseIds(number) {
+    var s = number.toUpperCase().replace(/\s+/g, "");
+    var subj = (s.match(/^[A-Z]+/) || [""])[0];
+    if (!subj) return [];
+    return (s.slice(subj.length).match(/\d{3,5}[A-Z]?/g) || []).map(function (n) {
+      return subj + (/^\d{3}$/.test(n) ? n + "00" : n);
+    });
+  }
+
+  function shortMatches(f) {
+    var table = addDrop.short[f.term + " " + f.year];
+    if (!table) return null;
+    var ids = courseIds(f.number);
+    return table.rows.filter(function (r) { return ids.indexOf(r[0]) >= 0; });
+  }
+
+  // Work out the dates the chosen length implies: { start, end, hint } or { hint } when unknown.
+  function lengthDates(f) {
+    var termName = f.term + " " + f.year;
+    if (f.length === "full") {
+      var full = findSession(f, /^full term/i);
+      if (full) return { start: full.start, end: full.end, hint: "Full term from the " + ADD_DROP + "." };
+      if (termInfo) return { start: toInput(termInfo.begin), end: toInput(termInfo.end || termInfo.begin), hint: "Full term from the Academic Calendar" + (termInfo.source === "official" ? "." : " (" + termInfo.source + ").") };
+      return { hint: "The Purdue calendar doesn’t list " + termName + " yet. Enter the course dates." };
+    }
+    if (f.length === "first8" || f.length === "second8") {
+      var half = findSession(f, f.length === "first8" ? /first eight/i : /second eight/i);
+      if (half) return { start: half.start, end: half.end, hint: half.label + " from the " + ADD_DROP + "." };
+      return { hint: termName + " 8-week dates aren’t posted on the " + ADD_DROP + " yet. Enter the course dates." };
+    }
+    if (/^seven/.test(f.length)) {
+      var i = f.length.split(":")[1];
+      var sevens = termSessions(f).filter(function (s) { return /seven|7[- ]?week/i.test(s.label) || (weeksLong(s) > 6.2 && weeksLong(s) < 7.8); });
+      if (i != null && sevens[+i]) return { start: sevens[+i].start, end: sevens[+i].end, hint: sevens[+i].label + " from the " + ADD_DROP + "." };
+      return { hint: termName + " 7-week dates aren’t posted on the " + ADD_DROP + " yet. Enter the course dates." };
+    }
+    if (f.length === "short") {
+      var rows = shortMatches(f);
+      if (!rows) return { hint: termName + " short-course dates aren’t posted on the " + ADD_DROP + " yet. Enter the course dates." };
+      if (!courseIds(f.number).length) return { hint: "Enter a course number above (like GRAD 502) to look up its short-course dates." };
+      if (!rows.length) return { hint: "No short-course sections for " + esc(f.number) + " in " + termName + " on the " + ADD_DROP + ". Check the course number or enter the dates." };
+      var pick = rows.filter(function (r) { return r[1] === shortPick; })[0];
+      var distinct = rows.filter(function (r, k) { return rows.findIndex(function (x) { return x[3] === r[3] && x[4] === r[4]; }) === k; });
+      if (!pick && distinct.length === 1) pick = rows[0];
+      if (!pick) return { hint: "Pick a section below to fill in its dates." };
+      return { start: pick[3], end: pick[4], crn: pick[1], hint: pick[0] + " (CRN " + pick[1] + ") from the " + ADD_DROP + " short-course list." };
+    }
+    return { hint: "Enter the course start and end dates." };
+  }
+
+  function renderShortResults(f, chosen) {
+    var box = $("short-results");
+    var rows = f.length === "short" ? shortMatches(f) : null;
+    if (!rows || rows.length < 2) { box.hidden = true; box.innerHTML = ""; return; }
+    box.hidden = false;
+    box.innerHTML = '<p class="short-head">' + rows.length + " sections found</p>" + rows.map(function (r) {
+      return '<label class="check"><input type="radio" name="short-crn" value="' + esc(r[1]) + '"' + (chosen === r[1] ? " checked" : "") + "> " +
+        "CRN " + esc(r[1]) + " · " + S.fmtRange(S.parseInputDate(r[3]), S.parseInputDate(r[4])) + ", " + r[4].slice(0, 4) +
+        ' <span class="sub">(' + esc(r[0]) + ", session " + esc(r[2]) + ")</span></label>";
+    }).join("");
   }
 
   function isBreak(w) {
@@ -88,21 +208,22 @@
     $("error").textContent = "";
 
     termInfo = f.year ? Cal.findTerm(calendar.events, f.term, f.year, f.start, f.end) : null;
-
-    if (termInfo && !datesTouched) {
-      $("start").value = toInput(termInfo.begin);
-      $("end").value = toInput(termInfo.end || termInfo.begin);
-      f = readForm();
-    }
-
+    f.length = syncLengthMenu(f);
+    var auto = f.year ? lengthDates(f) : { hint: "" };
+    renderShortResults(f, auto.crn);
     var hint = $("term-hint");
-    if (termInfo) {
-      hint.innerHTML = f.term + " " + f.year + " on the Purdue calendar: <strong>" + S.fmtLong(termInfo.begin) + "</strong> to <strong>" +
-        S.fmtLong(termInfo.end || termInfo.begin) + "</strong>" + (termInfo.source === "official" ? "" : " (" + termInfo.source + ")") +
-        '. <button type="button" class="linkish" id="use-term">Use term dates</button>';
-      $("use-term").onclick = function () { datesTouched = false; breakOverride = {}; update(); };
+    if (auto.start && !datesTouched) {
+      $("start").value = auto.start;
+      $("end").value = auto.end;
+      f = Object.assign(readForm(), { length: f.length });
+      hint.innerHTML = auto.hint;
+    } else if (auto.start) {
+      hint.innerHTML = 'You changed the dates. <button type="button" class="linkish" id="use-length">Reset to ' +
+        esc(S.fmtRange(S.parseInputDate(auto.start), S.parseInputDate(auto.end))) + "</button>";
+      $("use-length").onclick = function () { datesTouched = false; breakOverride = {}; update(); };
     } else {
-      hint.textContent = f.year ? "The Purdue calendar doesn’t list " + f.term + " " + f.year + " yet. Enter course dates manually." : "";
+      if (!datesTouched && f.length !== "manual") { $("start").value = ""; $("end").value = ""; f = Object.assign(readForm(), { length: f.length }); }
+      hint.innerHTML = auto.hint;
     }
 
     var notices = [];
@@ -192,11 +313,18 @@
 
   // ---------- Inputs ----------
 
-  ["title", "number", "intro", "bullets", "source-note", "fillable"].forEach(function (id) {
+  ["title", "intro", "bullets", "source-note", "fillable"].forEach(function (id) {
     $(id).addEventListener("input", update);
   });
-  ["term", "year"].forEach(function (id) {
-    $(id).addEventListener("change", function () { datesTouched = false; breakOverride = {}; update(); });
+  $("number").addEventListener("input", function () {
+    if ($("length").value === "short") { shortPick = null; datesTouched = false; breakOverride = {}; }
+    update();
+  });
+  ["term", "year", "length"].forEach(function (id) {
+    $(id).addEventListener("change", function () { datesTouched = false; shortPick = null; breakOverride = {}; update(); });
+  });
+  $("short-results").addEventListener("change", function (e) {
+    if (e.target.name === "short-crn") { shortPick = e.target.value; datesTouched = false; breakOverride = {}; update(); }
   });
   ["start", "end"].forEach(function (id) {
     $(id).addEventListener("change", function () { datesTouched = true; update(); });

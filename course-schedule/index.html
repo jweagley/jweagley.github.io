@@ -6,7 +6,7 @@
   <title>Course Schedule Builder — JD Weagley, Ed.D.</title>
   <meta name="description" content="Build a week-by-week course schedule Word document with Purdue holidays and breaks filled in from the official Academic Calendar." />
   <link rel="stylesheet" href="../assets/css/styles.css" />
-  <link rel="stylesheet" href="tool.css?v=4" />
+  <link rel="stylesheet" href="tool.css?v=5" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗓️</text></svg>" />
 </head>
 <body>
@@ -54,6 +54,7 @@
             </label>
             <label>Course number
               <input id="number" type="text" placeholder="GRAD 589/588" autocomplete="off" />
+              <span class="field-note">Also used to look up short-course dates.</span>
             </label>
           </fieldset>
 
@@ -72,6 +73,10 @@
                 <input id="year" type="number" min="2020" max="2040" step="1" />
               </label>
             </div>
+            <label>Course length
+              <select id="length"></select>
+            </label>
+            <div id="short-results" class="short-results" hidden></div>
             <div class="row2">
               <label>Course start date
                 <input id="start" type="date" required />
@@ -129,10 +134,10 @@
   </footer>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-  <script src="calendar.js?v=4"></script>
-  <script src="schedule.js?v=4"></script>
-  <script src="docx.js?v=4"></script>
-  <script src="app.js?v=4"></script>
+  <script src="calendar.js?v=5"></script>
+  <script src="schedule.js?v=5"></script>
+  <script src="docx.js?v=5"></script>
+  <script src="app.js?v=5"></script>
   <script src="../assets/js/main.js"></script>
 </body>
 </html>

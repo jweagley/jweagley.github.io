@@ -153,6 +153,83 @@
     });
   }
 
+  // ---------- Add/Drop calendar ----------
+  // Each term has a "Course timeline" of cards (an h3 date range followed by a
+  // label such as "Full Term" or "First Eight Weeks"), and a few terms have a
+  // "Short Course Critical Dates" table listing every nonstandard section.
+
+  function iso(ms) { return new Date(ms).toISOString().slice(0, 10); }
+
+  function mdyToIso(s) {
+    var m = /^(\d{1,2})\/(\d{1,2})\/(\d{4})$/.exec(s);
+    return m ? m[3] + "-" + ("0" + m[1]).slice(-2) + "-" + ("0" + m[2]).slice(-2) : null;
+  }
+
+  function parseAddDrop(html) {
+    var sessions = [];
+    var short = {};
+    var term = null, inTimeline = false, pendingDate = null, shortKey = null;
+    var re = /<h2[^>]*>([\s\S]*?)<\/h2>|<h3[^>]*>([\s\S]*?)<\/h3>|<p[^>]*>([\s\S]*?)<\/p>|<tr[^>]*>([\s\S]*?)<\/tr>/g;
+    var m;
+    while ((m = re.exec(html))) {
+      if (m[1] != null) {
+        var h2 = decode(m[1]);
+        var t = h2.match(/^(Fall|Spring|Summer|Winter) (\d{4}) Add\/Drop Calendar/i);
+        if (t) term = { term: t[1][0].toUpperCase() + t[1].slice(1).toLowerCase(), year: +t[2] };
+        inTimeline = /^Course timeline/i.test(h2);
+        pendingDate = null;
+        if (!/^Short Course/i.test(h2)) shortKey = null;
+        continue;
+      }
+      if (m[2] != null) {
+        var h3 = decode(m[2]);
+        var s = h3.match(/^(Fall|Spring|Summer|Winter) (\d{4}) Short Course Critical Dates/i);
+        if (s) {
+          shortKey = s[1][0].toUpperCase() + s[1].slice(1).toLowerCase() + " " + s[2];
+          short[shortKey] = { published: null, rows: [] };
+          continue;
+        }
+        pendingDate = inTimeline && term ? parseDates(h3, term.year) : null;
+        continue;
+      }
+      if (m[3] != null) {
+        var p = decode(m[3]);
+        if (shortKey && !short[shortKey].published) {
+          var pub = p.match(/Calendar published:\s*(.+)$/i);
+          if (pub) short[shortKey].published = pub[1];
+        }
+        if (pendingDate && pendingDate.length === 1 && p && !/^No Classes/i.test(p)) {
+          sessions.push({ term: term.term, year: term.year, label: p, start: iso(pendingDate[0].start), end: iso(pendingDate[0].end) });
+        }
+        pendingDate = null;
+        continue;
+      }
+      if (shortKey) {
+        var cells = [], cre = /<td[^>]*>([\s\S]*?)<\/td>/g, c;
+        while ((c = cre.exec(m[4]))) cells.push(decode(c[1]));
+        var a = cells.length >= 5 && mdyToIso(cells[3]), b = a && mdyToIso(cells[4]);
+        if (a && b && /^[A-Z]{2,5}\s*[0-9A-Z]{3,6}$/i.test(cells[0]))
+          short[shortKey].rows.push([cells[0].replace(/\s+/g, "").toUpperCase(), cells[1], cells[2], a, b]);
+      }
+    }
+    return { sessions: sessions, short: short };
+  }
+
+  function fetchAddDrop() {
+    return fetch(API + "?slug=add-drop&_fields=content,link,modified", { credentials: "omit" })
+      .then(function (r) {
+        if (!r.ok) throw new Error("HTTP " + r.status);
+        return r.json();
+      })
+      .then(function (pages) {
+        var page = pages.filter(function (p) { return /\/registrar\/calendars\/add-drop\//.test(p.link); })[0];
+        if (!page) throw new Error("add/drop page not found");
+        var res = parseAddDrop(page.content.rendered);
+        res.modified = (page.modified || "").slice(0, 10);
+        return res;
+      });
+  }
+
   // ---------- Queries ----------
 
   var CLOSURE = /university closed|break|recess/i;
@@ -196,6 +273,8 @@
 
   var api = {
     fetchCalendar: fetchCalendar,
+    fetchAddDrop: fetchAddDrop,
+    parseAddDrop: parseAddDrop,
     parsePage: parsePage,
     parseDates: parseDates,
     merge: merge,

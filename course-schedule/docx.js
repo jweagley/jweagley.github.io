@@ -89,6 +89,8 @@
   }
 
   function logoXml(logo) {
+    // EMU sizes must be integers or Word refuses to open the file.
+    logo = { cx: Math.round(logo.cx), cy: Math.round(logo.cy), ext: logo.ext };
     return (
       '<w:r><w:drawing><wp:inline distT="0" distB="0" distL="0" distR="0">' +
       '<wp:extent cx="' + logo.cx + '" cy="' + logo.cy + '"/><wp:docPr id="1" name="Logo"/>' +

@@ -203,7 +203,7 @@
   });
 
   // Official Purdue horizontal logo (PU-H-Full-RGB) is the default; an upload replaces it.
-  var LOGO_W = 2.2 * 914400; // inches -> EMU
+  var LOGO_W = Math.round(2.2 * 914400); // inches -> EMU (Word needs integers)
   var defaultLogo = null;
   fetch("purdue-logo.png")
     .then(function (r) { if (!r.ok) throw new Error(); return r.arrayBuffer(); })

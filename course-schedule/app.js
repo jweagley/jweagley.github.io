@@ -40,6 +40,9 @@
     .then(function () {
       pickDefaultTerm();
       update();
+    })
+    .catch(function (err) {
+      setStatus("warn", "Something went wrong setting up the page (" + esc(err.message) + "). Try reloading.");
     });
 
   function acads(c) { return c.events.map(function (e) { return e.acad; }).sort(); }

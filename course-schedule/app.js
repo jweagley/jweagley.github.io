@@ -5,7 +5,7 @@
   var Cal = window.PurdueCalendar, S = window.CourseSchedule;
   var $ = function (id) { return document.getElementById(id); };
 
-  var calendar = null;      // { events, published, retrieved, live }
+  var calendar = null;      // { events, published, modified } from calendar-data.json
   var weeks = [];           // raw weeks from buildWeeks
   var breakOverride = {};   // week start (ms) -> true/false, set by the user
   var datesTouched = false; // stop auto-filling once the user edits dates
@@ -20,24 +20,31 @@
     el.querySelector(".msg").innerHTML = html;
   }
 
-  Cal.fetchCalendar()
+  var OFFICIAL = '<a href="https://www.purdue.edu/registrar/calendars/academic/" target="_blank" rel="noopener">official calendar</a>';
+
+  // calendar-data.json is refreshed daily from the Registrar by a GitHub Action.
+  fetch("calendar-data.json", { cache: "no-cache" })
+    .then(function (r) {
+      if (!r.ok) throw new Error("HTTP " + r.status);
+      return r.json();
+    })
     .then(function (c) {
       calendar = c;
-      setStatus("ok", "Live Purdue Academic Calendar loaded (" + c.events.length + " dates, through " + lastAcad(c) + ").");
+      var updated = c.modified && c.modified.official ? " Registrar page last updated " + S.fmtLong(S.parseInputDate(c.modified.official)).replace(/^\w+, /, "") + "." : "";
+      setStatus("ok", "Purdue Academic Calendar loaded, " + firstAcad(c) + " through " + lastAcad(c) + "." + updated);
     })
     .catch(function () {
-      calendar = window.PURDUE_CALENDAR_SNAPSHOT;
-      setStatus("warn", "Couldn’t reach purdue.edu, so a saved copy of the calendar from " + calendar.retrieved + " is in use. Double-check against the <a href=\"https://www.purdue.edu/registrar/calendars/academic/\" target=\"_blank\" rel=\"noopener\">official calendar</a>.");
+      calendar = { events: [], published: {}, modified: {} };
+      setStatus("warn", "The Purdue calendar data couldn’t be loaded, so holidays won’t be marked. Check dates against the " + OFFICIAL + ".");
     })
     .then(function () {
       pickDefaultTerm();
       update();
     });
 
-  function lastAcad(c) {
-    var a = c.events.map(function (e) { return e.acad; }).sort();
-    return a[a.length - 1];
-  }
+  function acads(c) { return c.events.map(function (e) { return e.acad; }).sort(); }
+  function firstAcad(c) { return acads(c)[0]; }
+  function lastAcad(c) { var a = acads(c); return a[a.length - 1]; }
 
   // Default to the next term that hasn't started yet.
   function pickDefaultTerm() {
@@ -112,7 +119,7 @@
       if (termInfo && termInfo.source === "projected")
         notices.push(["warn", "The " + termInfo.acad + " calendar is still <em>projected</em>, so its dates may change before it’s final."]);
       var lastYear = lastAcad(calendar);
-      if (f.end > Date.UTC(2000 + +lastYear.slice(-2), 7, 31))
+      if (lastYear && f.end > Date.UTC(2000 + +lastYear.slice(-2), 7, 31))
         notices.push(["warn", "Purdue’s calendar only goes through " + lastYear + ", so holidays after that aren’t included."]);
       if (!closures.length) notices.push(["info", "No campus closures or breaks fall within these dates."]);
     }
@@ -176,8 +183,8 @@
       calendar.events.forEach(function (e) { if (e.start <= w.end && e.end >= w.start) acads[e.acad] = e.source; });
     });
     var parts = Object.keys(acads).sort().map(function (a) { return acads[a] + " " + a + " calendar"; });
-    var when = calendar.live ? "retrieved " + S.fmtLong(Date.now()).replace(/^\w+, /, "") : "saved copy from " + calendar.retrieved;
-    return "Holidays and breaks from the Purdue Academic Calendar (" + (parts.join(", ") || "no calendar data for these dates") + "; " + when + "). Dates are subject to change.";
+    return "Holidays and breaks from the Purdue Academic Calendar (" + (parts.join(", ") || "no calendar data for these dates") + "; generated " +
+      S.fmtLong(Date.now()).replace(/^\w+, /, "") + "). Dates are subject to change.";
   }
 
   // ---------- Inputs ----------
@@ -192,17 +199,27 @@
     $(id).addEventListener("change", function () { datesTouched = true; update(); });
   });
 
+  // Official Purdue horizontal logo (PU-H-Full-RGB) is the default; an upload replaces it.
+  var LOGO_W = 2.2 * 914400; // inches -> EMU
+  var defaultLogo = null;
+  fetch("purdue-logo.png")
+    .then(function (r) { if (!r.ok) throw new Error(); return r.arrayBuffer(); })
+    .then(function (buf) {
+      defaultLogo = { url: "purdue-logo.png", data: new Uint8Array(buf), ext: "png", cx: LOGO_W, cy: Math.round(LOGO_W * 327 / 1800) };
+      if (!logo) { logo = defaultLogo; update(); }
+    })
+    .catch(function () { /* falls back to the text wordmark */ });
+
   $("logo").addEventListener("change", function () {
     var file = this.files[0];
-    if (logo) URL.revokeObjectURL(logo.url);
-    logo = null;
+    if (logo && logo !== defaultLogo) URL.revokeObjectURL(logo.url);
+    logo = defaultLogo;
     if (!file) return update();
     var url = URL.createObjectURL(file);
     var img = new Image();
     img.onload = function () {
       file.arrayBuffer().then(function (buf) {
-        var cx = 2 * 914400; // 2 inches wide
-        logo = { url: url, data: new Uint8Array(buf), ext: file.type === "image/png" ? "png" : "jpeg", cx: cx, cy: Math.round(cx * img.naturalHeight / img.naturalWidth) };
+        logo = { url: url, data: new Uint8Array(buf), ext: file.type === "image/png" ? "png" : "jpeg", cx: LOGO_W, cy: Math.round(LOGO_W * img.naturalHeight / img.naturalWidth) };
         update();
       });
     };

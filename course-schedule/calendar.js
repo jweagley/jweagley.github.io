@@ -1,6 +1,8 @@
 // Purdue Academic Calendar: fetch + parse.
-// Reads the Registrar's WordPress REST API (which allows cross-origin GETs),
-// so this runs entirely in the browser with no server.
+// Reads the Registrar's WordPress REST API. Purdue's bot protection blocks
+// cross-origin requests from browsers, so fetchCalendar() runs in Node
+// (sync-calendar.js, on a GitHub Actions schedule) and the page loads the
+// resulting calendar-data.json from its own site.
 (function (root) {
   "use strict";
 
@@ -133,6 +135,8 @@
             if (!page) throw new Error("page not found: " + src.slug);
             var res = parsePage(page.content.rendered, src);
             res.priority = src.priority;
+            res.kind = src.kind;
+            res.modified = (page.modified || "").slice(0, 10);
             return res;
           })
           .catch(function (err) {
@@ -143,8 +147,8 @@
       })
     ).then(function (parsed) {
       var merged = merge(parsed);
-      merged.retrieved = new Date().toISOString().slice(0, 10);
-      merged.live = true;
+      merged.modified = {};
+      parsed.forEach(function (p) { if (p.modified) merged.modified[p.kind] = p.modified; });
       return merged;
     });
   }

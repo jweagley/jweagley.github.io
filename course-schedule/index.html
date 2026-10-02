@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Course Schedule Builder — JD Weagley, Ed.D.</title>
+  <meta name="description" content="Build a week-by-week course schedule Word document with Purdue holidays and breaks filled in from the official Academic Calendar." />
+  <link rel="stylesheet" href="../assets/css/styles.css" />
+  <link rel="stylesheet" href="tool.css" />
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🗓️</text></svg>" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <nav class="nav" aria-label="Primary">
+        <a class="brand" href="../index.html">JD Weagley, Ed.D.</a>
+        <div class="nav-right">
+          <ul class="nav-links" id="nav-links">
+            <li><a href="../index.html">About</a></li>
+            <li><a href="../research.html">Research &amp; Presentations</a></li>
+            <li><a href="../instructional-design.html">Instructional Design</a></li>
+            <li><a href="../code.html" class="active">Code</a></li>
+          </ul>
+          <button id="theme-toggle" class="icon-btn" type="button" aria-label="Toggle color theme">☾</button>
+          <button class="nav-toggle" aria-controls="nav-links" aria-expanded="false" aria-label="Toggle menu">☰</button>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <div class="page-head">
+      <div class="container">
+        <h1>Course Schedule Builder</h1>
+        <p>Enter a course and its dates to get a week-by-week schedule as a Word document. Purdue holidays and breaks are pulled from the
+          <a href="https://www.purdue.edu/registrar/calendars/academic/" target="_blank" rel="noopener">Purdue Academic Calendar</a>,
+          and each week has a fill-in field for deliverables.</p>
+      </div>
+    </div>
+
+    <section class="tool">
+      <div class="container tool-grid">
+        <form id="form" class="panel" novalidate>
+          <div class="cal-status" id="cal-status" role="status" aria-live="polite">
+            <span class="dot"></span><span class="msg">Loading the Purdue Academic Calendar…</span>
+          </div>
+
+          <fieldset>
+            <legend>Course</legend>
+            <label>Course name
+              <input id="title" type="text" placeholder="Online Capstone Experience" autocomplete="off" />
+            </label>
+            <label>Course number
+              <input id="number" type="text" placeholder="GRAD 589/588" autocomplete="off" />
+            </label>
+          </fieldset>
+
+          <fieldset>
+            <legend>Term</legend>
+            <div class="row2">
+              <label>Term
+                <select id="term">
+                  <option>Fall</option>
+                  <option>Spring</option>
+                  <option>Summer</option>
+                  <option>Winter</option>
+                </select>
+              </label>
+              <label>Year
+                <input id="year" type="number" min="2020" max="2040" step="1" />
+              </label>
+            </div>
+            <div class="row2">
+              <label>Course start date
+                <input id="start" type="date" required />
+              </label>
+              <label>Course end date
+                <input id="end" type="date" required />
+              </label>
+            </div>
+            <p class="hint" id="term-hint"></p>
+          </fieldset>
+
+          <details class="options">
+            <summary>Document options</summary>
+            <label>Intro line
+              <input id="intro" type="text" value="Please see below breakdown of the Academic Semester" />
+            </label>
+            <div class="row2">
+              <label>Bullets per week
+                <select id="bullets">
+                  <option>1</option><option>2</option><option>3</option><option>4</option><option>5</option>
+                </select>
+              </label>
+              <label>Logo (PNG or JPG, optional)
+                <input id="logo" type="file" accept="image/png,image/jpeg" />
+              </label>
+            </div>
+            <label class="check"><input id="fillable" type="checkbox" checked /> Use Word fill-in fields (gray “Click to add” placeholders)</label>
+            <label class="check"><input id="source-note" type="checkbox" checked /> Add a line noting where the holiday dates came from</label>
+          </details>
+
+          <div class="btn-row">
+            <button class="btn btn-primary" id="download" type="submit" disabled>Download Word document</button>
+          </div>
+          <p class="error" id="error" role="alert"></p>
+        </form>
+
+        <div class="panel preview-panel">
+          <h2 class="preview-title">Preview</h2>
+          <div id="notices"></div>
+          <div class="doc" id="doc" aria-label="Schedule preview">
+            <p class="empty">Choose a term and course dates to see the schedule.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <ul class="footer-links">
+        <li><a href="mailto:jweagley@purdue.edu">Email</a></li>
+      </ul>
+      <p class="footer-note">Dates come from the Purdue Registrar and may change. Always check the <a href="https://www.purdue.edu/registrar/calendars/academic/" target="_blank" rel="noopener">official calendar</a>.</p>
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="calendar-snapshot.js"></script>
+  <script src="calendar.js"></script>
+  <script src="schedule.js"></script>
+  <script src="docx.js"></script>
+  <script src="app.js"></script>
+  <script src="../assets/js/main.js"></script>
+</body>
+</html>

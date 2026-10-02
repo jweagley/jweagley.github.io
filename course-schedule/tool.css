@@ -1,0 +1,110 @@
+/* Course Schedule Builder — page styles (builds on ../assets/css/styles.css) */
+
+:root {
+  --gold: #cfb991;
+  --gold-ink: #8e6f3e;
+  --ok: #2e7d4f;
+  --warn: #9a6400;
+  --warn-bg: #fff6e0;
+  --err: #b42318;
+  --err-bg: #fdecea;
+  --paper: #ffffff;
+  --paper-ink: #1c1c1c;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --ok: #6fcf97; --warn: #f2c46d; --warn-bg: #2d2412; --err: #f97066; --err-bg: #2f1714; }
+}
+:root[data-theme="dark"] { --ok: #6fcf97; --warn: #f2c46d; --warn-bg: #2d2412; --err: #f97066; --err-bg: #2f1714; }
+
+.tool { padding-top: 24px; }
+.tool-grid {
+  display: grid;
+  grid-template-columns: minmax(280px, 380px) 1fr;
+  gap: 24px;
+  align-items: start;
+}
+@media (max-width: 860px) { .tool-grid { grid-template-columns: 1fr; } }
+
+.panel {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 20px;
+  min-width: 0;
+}
+
+fieldset { border: 0; margin: 0 0 18px; padding: 0; min-width: 0; }
+legend { font-weight: 700; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin-bottom: 8px; padding: 0; }
+label { display: block; font-size: 0.9rem; font-weight: 600; color: var(--text); margin-bottom: 12px; }
+input[type="text"], input[type="number"], input[type="date"], select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 9px 10px;
+  font: inherit;
+  font-weight: 400;
+  color: var(--text);
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+}
+input[type="file"] { display: block; margin-top: 6px; font-size: 0.82rem; font-weight: 400; max-width: 100%; color: var(--text-soft); }
+input:focus, select:focus { outline: 2px solid var(--accent); outline-offset: 1px; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media (max-width: 420px) { .row2 { grid-template-columns: 1fr; } }
+label.check { display: flex; gap: 8px; align-items: flex-start; font-weight: 400; }
+label.check input { margin-top: 3px; }
+
+.hint { font-size: 0.85rem; color: var(--text-soft); margin: -4px 0 0; }
+.linkish { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; }
+
+.options { border-top: 1px solid var(--border); padding-top: 12px; margin-bottom: 18px; }
+.options summary { cursor: pointer; font-weight: 600; margin-bottom: 12px; }
+
+.btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+button.btn { font: inherit; cursor: pointer; border: 1px solid transparent; }
+.error { color: var(--err); font-size: 0.9rem; min-height: 1em; margin: 10px 0 0; }
+
+.cal-status { display: flex; gap: 10px; align-items: flex-start; font-size: 0.85rem; color: var(--text-soft); background: var(--bg-soft); border-radius: 8px; padding: 10px 12px; margin-bottom: 18px; }
+.cal-status .dot { flex: none; width: 9px; height: 9px; border-radius: 50%; margin-top: 5px; background: var(--text-faint); animation: pulse 1.2s infinite; }
+.cal-status.ok .dot { background: var(--ok); animation: none; }
+.cal-status.warn .dot { background: var(--warn); animation: none; }
+@keyframes pulse { 50% { opacity: 0.3; } }
+
+.preview-title { font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); margin: 0 0 12px; }
+.notice { font-size: 0.88rem; border-radius: 8px; padding: 9px 12px; margin: 0 0 10px; background: var(--bg-soft); color: var(--text-soft); }
+.notice.warn { background: var(--warn-bg); color: var(--warn); }
+.notice.error { background: var(--err-bg); color: var(--err); }
+
+/* The preview is a sheet of paper in both themes, like the Word doc. */
+.doc {
+  background: var(--paper);
+  color: var(--paper-ink);
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  padding: 28px 28px 20px;
+  overflow-x: auto;
+}
+.doc .empty { color: #777; text-align: center; margin: 40px 0; font-family: var(--font-sans); }
+.doc-logo { margin-bottom: 4px; }
+.doc-logo img { max-width: 190px; display: block; }
+.doc-logo .wm { font-family: Georgia, serif; font-weight: 700; font-size: 26px; letter-spacing: 0.01em; }
+.doc-logo .wm2 { font-size: 11px; letter-spacing: 0.15em; color: #555960; }
+.doc-title { text-align: center; font-weight: 700; font-style: italic; font-size: 21px; margin: 0; }
+.doc-sub { text-align: center; font-style: italic; font-size: 14px; margin: 2px 0 10px; }
+.doc-intro { margin: 0 0 4px; }
+.doc table { width: 100%; min-width: 360px; border-collapse: collapse; border: 1.5px solid #000; }
+.doc th, .doc td { border: 1px solid #000; padding: 5px 8px; vertical-align: middle; }
+.doc th { background: var(--gold); font-weight: 700; }
+.doc td.wk { width: 23%; text-align: center; line-height: 1.35; }
+.doc td ul { margin: 0; padding-left: 20px; }
+.doc .ph { color: #808080; }
+.doc .note { display: block; font-style: italic; font-size: 11px; color: var(--gold-ink); margin-top: 3px; }
+.doc tr.break td { background: #000; color: #fff; font-weight: 700; text-align: center; }
+.doc .brk { display: block; margin: 5px 0 0; font: 400 11px var(--font-sans); color: #555; }
+.doc tr.break .brk { display: inline-block; margin: 0 0 0 12px; color: #ddd; }
+.doc .brk input { vertical-align: -1px; margin-right: 3px; }
+.doc-source { font-style: italic; font-size: 10.5px; color: #6f727b; margin: 8px 0 0; }

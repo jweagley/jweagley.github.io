@@ -11,6 +11,7 @@ little JavaScript. No build tools required — it runs directly on GitHub Pages.
 | `research.html` | Research & Presentations |
 | `instructional-design.html` | Instructional Design |
 | `code.html` | Code |
+| `course-schedule/` | Course Schedule Builder (Purdue calendar → Word schedule) |
 
 Shared styling lives in `assets/css/styles.css`; shared behavior in `assets/js/main.js`.
 

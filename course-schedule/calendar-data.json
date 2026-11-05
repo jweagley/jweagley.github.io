@@ -1,8 +1,8 @@
 {
  "modified": {
-  "official": "2026-08-21",
+  "official": "2026-11-05",
   "archived": "2026-09-29",
-  "projected": "2026-08-21"
+  "projected": "2026-11-05"
  },
  "published": {
   "2026-27": "Feb. 9, 2026",
@@ -541,15 +541,6 @@
    "priority": 3
   },
   {
-   "start": 1817596800000,
-   "end": 1817596800000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 7",
-   "acad": "2026-27",
-   "source": "official",
-   "priority": 3
-  },
-  {
    "start": 1818979200000,
    "end": 1818979200000,
    "name": "Fall term classes begin",
@@ -802,15 +793,6 @@
    "priority": 3
   },
   {
-   "start": 1849046400000,
-   "end": 1849046400000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 5",
-   "acad": "2027-28",
-   "source": "official",
-   "priority": 3
-  },
-  {
    "start": 1850428800000,
    "end": 1850428800000,
    "name": "Fall term classes begin",
@@ -1049,15 +1031,6 @@
    "end": 1880409600000,
    "name": "Summer term classes/term ends",
    "dateText": "Aug. 3",
-   "acad": "2028-29",
-   "source": "projected",
-   "priority": 1
-  },
-  {
-   "start": 1880496000000,
-   "end": 1880496000000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 4",
    "acad": "2028-29",
    "source": "projected",
    "priority": 1
@@ -1315,15 +1288,6 @@
    "priority": 1
   },
   {
-   "start": 1911945600000,
-   "end": 1911945600000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 3",
-   "acad": "2029-30",
-   "source": "projected",
-   "priority": 1
-  },
-  {
    "start": 1913328000000,
    "end": 1913328000000,
    "name": "Fall term classes begin",
@@ -1571,15 +1535,6 @@
    "end": 1943913600000,
    "name": "Summer term classes/term ends",
    "dateText": "Aug. 8",
-   "acad": "2030-31",
-   "source": "projected",
-   "priority": 1
-  },
-  {
-   "start": 1944000000000,
-   "end": 1944000000000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 9",
    "acad": "2030-31",
    "source": "projected",
    "priority": 1
@@ -1837,15 +1792,6 @@
    "priority": 1
   },
   {
-   "start": 1975449600000,
-   "end": 1975449600000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 7",
-   "acad": "2031-32",
-   "source": "projected",
-   "priority": 1
-  },
-  {
    "start": 1976832000000,
    "end": 1976832000000,
    "name": "Fall term classes begin",
@@ -2093,15 +2039,6 @@
    "end": 2006812800000,
    "name": "Summer term classes/term ends",
    "dateText": "Aug. 5",
-   "acad": "2032-33",
-   "source": "projected",
-   "priority": 1
-  },
-  {
-   "start": 2006899200000,
-   "end": 2006899200000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 6",
    "acad": "2032-33",
    "source": "projected",
    "priority": 1
@@ -2359,15 +2296,6 @@
    "priority": 1
   },
   {
-   "start": 2038348800000,
-   "end": 2038348800000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 5",
-   "acad": "2033-34",
-   "source": "projected",
-   "priority": 1
-  },
-  {
    "start": 2039731200000,
    "end": 2039731200000,
    "name": "Fall term classes begin",
@@ -2606,15 +2534,6 @@
    "end": 2069712000000,
    "name": "Summer term classes/term ends",
    "dateText": "Aug. 3",
-   "acad": "2034-35",
-   "source": "projected",
-   "priority": 1
-  },
-  {
-   "start": 2069798400000,
-   "end": 2069798400000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 4",
    "acad": "2034-35",
    "source": "projected",
    "priority": 1
@@ -2872,15 +2791,6 @@
    "priority": 1
   },
   {
-   "start": 2101852800000,
-   "end": 2101852800000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 9",
-   "acad": "2035-36",
-   "source": "projected",
-   "priority": 1
-  },
-  {
    "start": 2102630400000,
    "end": 2102630400000,
    "name": "Fall term classes begin",
@@ -3128,15 +3038,6 @@
    "end": 2133216000000,
    "name": "Summer term classes/term ends",
    "dateText": "Aug. 7",
-   "acad": "2036-37",
-   "source": "projected",
-   "priority": 1
-  },
-  {
-   "start": 2133302400000,
-   "end": 2133302400000,
-   "name": "Summer commencement",
-   "dateText": "Aug. 8",
    "acad": "2036-37",
    "source": "projected",
    "priority": 1

@@ -48,6 +48,69 @@
    "label": "Second Eight Weeks",
    "start": "2027-03-08",
    "end": "2027-05-08"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Twelve week session",
+   "start": "2027-05-17",
+   "end": "2027-08-06"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "First eight week session",
+   "start": "2027-05-17",
+   "end": "2027-07-09"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "First four week session",
+   "start": "2027-05-17",
+   "end": "2027-06-11"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Memorial Day",
+   "start": "2027-05-31",
+   "end": "2027-05-31"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Second four week session",
+   "start": "2027-06-14",
+   "end": "2027-07-09"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Second eight week session",
+   "start": "2027-06-14",
+   "end": "2027-08-06"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Observance of Independence Day",
+   "start": "2027-07-05",
+   "end": "2027-07-05"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Third four week session",
+   "start": "2027-07-12",
+   "end": "2027-08-06"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Early Start Session",
+   "start": "2027-07-12",
+   "end": "2027-08-13"
   }
  ],
  "short": {
@@ -16687,5 +16750,5 @@
    ]
   }
  },
- "modified": "2026-10-27"
+ "modified": "2026-11-05"
 }

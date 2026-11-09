@@ -52,23 +52,44 @@
   {
    "term": "Summer",
    "year": 2027,
-   "label": "Twelve week session",
+   "label": "Full Term",
+   "start": "2027-05-10",
+   "end": "2027-08-13"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "First Half Semester",
+   "start": "2027-05-10",
+   "end": "2027-06-25"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "Second Half Semester",
+   "start": "2027-06-28",
+   "end": "2027-08-13"
+  },
+  {
+   "term": "Summer",
+   "year": 2027,
+   "label": "12 Weeks",
    "start": "2027-05-17",
    "end": "2027-08-06"
   },
   {
    "term": "Summer",
    "year": 2027,
-   "label": "First eight week session",
+   "label": "First Four Weeks",
    "start": "2027-05-17",
-   "end": "2027-07-09"
+   "end": "2027-06-11"
   },
   {
    "term": "Summer",
    "year": 2027,
-   "label": "First four week session",
+   "label": "First Eight Weeks",
    "start": "2027-05-17",
-   "end": "2027-06-11"
+   "end": "2027-07-09"
   },
   {
    "term": "Summer",
@@ -80,14 +101,14 @@
   {
    "term": "Summer",
    "year": 2027,
-   "label": "Second four week session",
+   "label": "Second Four Weeks",
    "start": "2027-06-14",
    "end": "2027-07-09"
   },
   {
    "term": "Summer",
    "year": 2027,
-   "label": "Second eight week session",
+   "label": "Second Eight Weeks",
    "start": "2027-06-14",
    "end": "2027-08-06"
   },
@@ -101,14 +122,14 @@
   {
    "term": "Summer",
    "year": 2027,
-   "label": "Third four week session",
+   "label": "Third Four Weeks",
    "start": "2027-07-12",
    "end": "2027-08-06"
   },
   {
    "term": "Summer",
    "year": 2027,
-   "label": "Early Start Session",
+   "label": "Early Start",
    "start": "2027-07-12",
    "end": "2027-08-13"
   }
@@ -16750,5 +16771,5 @@
    ]
   }
  },
- "modified": "2026-11-05"
+ "modified": "2026-11-09"
 }

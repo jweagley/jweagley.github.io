@@ -1,6 +1,6 @@
 {
  "modified": {
-  "official": "2026-11-05",
+  "official": "2026-11-09",
   "archived": "2026-09-29",
   "projected": "2026-11-05"
  },
@@ -478,19 +478,19 @@
    "priority": 3
   },
   {
-   "start": 1810252800000,
-   "end": 1810425600000,
-   "name": "Spring commencement",
-   "dateText": "May 14-16",
+   "start": 1809907200000,
+   "end": 1809907200000,
+   "name": "Summer term classes begin",
+   "dateText": "May 10",
    "acad": "2026-27",
    "source": "official",
    "priority": 3
   },
   {
-   "start": 1810512000000,
-   "end": 1810512000000,
-   "name": "Summer term classes begin",
-   "dateText": "May 17",
+   "start": 1810252800000,
+   "end": 1810425600000,
+   "name": "Spring commencement",
+   "dateText": "May 14-16",
    "acad": "2026-27",
    "source": "official",
    "priority": 3
@@ -532,10 +532,10 @@
    "priority": 3
   },
   {
-   "start": 1817510400000,
-   "end": 1817510400000,
+   "start": 1818115200000,
+   "end": 1818115200000,
    "name": "Summer term classes/term ends",
-   "dateText": "Aug. 6",
+   "dateText": "Aug. 13",
    "acad": "2026-27",
    "source": "official",
    "priority": 3

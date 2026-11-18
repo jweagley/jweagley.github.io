@@ -1,8 +1,8 @@
 {
  "modified": {
-  "official": "2026-11-09",
+  "official": "2026-11-18",
   "archived": "2026-09-29",
-  "projected": "2026-11-13"
+  "projected": "2026-11-18"
  },
  "published": {
   "2026-27": "Feb. 9, 2026",
@@ -300,7 +300,7 @@
   {
    "start": 1789689600000,
    "end": 1789689600000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 18",
    "acad": "2026-27",
    "source": "official",
@@ -435,7 +435,7 @@
   {
    "start": 1801785600000,
    "end": 1801785600000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 5",
    "acad": "2026-27",
    "source": "official",
@@ -507,7 +507,7 @@
   {
    "start": 1812672000000,
    "end": 1812672000000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 11",
    "acad": "2026-27",
    "source": "official",
@@ -525,7 +525,7 @@
   {
    "start": 1814745600000,
    "end": 1814745600000,
-   "name": "Fourth of July (university closed)",
+   "name": "Independence Day observed (university closed)",
    "dateText": "July 5",
    "acad": "2026-27",
    "source": "official",
@@ -561,7 +561,7 @@
   {
    "start": 1821139200000,
    "end": 1821139200000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 17",
    "acad": "2027-28",
    "source": "official",
@@ -687,7 +687,7 @@
   {
    "start": 1833235200000,
    "end": 1833235200000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 4",
    "acad": "2027-28",
    "source": "official",
@@ -759,7 +759,7 @@
   {
    "start": 1844121600000,
    "end": 1844121600000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 9",
    "acad": "2027-28",
    "source": "official",
@@ -777,7 +777,7 @@
   {
    "start": 1846281600000,
    "end": 1846281600000,
-   "name": "Fourth of July (university closed)",
+   "name": "Independence Day (university closed)",
    "dateText": "July 4",
    "acad": "2027-28",
    "source": "official",
@@ -813,7 +813,7 @@
   {
    "start": 1852588800000,
    "end": 1852588800000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 15",
    "acad": "2028-29",
    "source": "projected",
@@ -930,7 +930,7 @@
   {
    "start": 1864684800000,
    "end": 1864684800000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 2",
    "acad": "2028-29",
    "source": "projected",
@@ -1002,7 +1002,7 @@
   {
    "start": 1875571200000,
    "end": 1875571200000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 8",
    "acad": "2028-29",
    "source": "projected",
@@ -1056,7 +1056,7 @@
   {
    "start": 1884038400000,
    "end": 1884038400000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 14",
    "acad": "2029-30",
    "source": "projected",
@@ -1182,7 +1182,7 @@
   {
    "start": 1896134400000,
    "end": 1896134400000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 1",
    "acad": "2029-30",
    "source": "projected",
@@ -1254,7 +1254,7 @@
   {
    "start": 1907020800000,
    "end": 1907020800000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 7",
    "acad": "2029-30",
    "source": "projected",
@@ -1308,7 +1308,7 @@
   {
    "start": 1915488000000,
    "end": 1915488000000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 13",
    "acad": "2030-31",
    "source": "projected",
@@ -1434,7 +1434,7 @@
   {
    "start": 1928188800000,
    "end": 1928188800000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 7",
    "acad": "2030-31",
    "source": "projected",
@@ -1506,7 +1506,7 @@
   {
    "start": 1939075200000,
    "end": 1939075200000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 13",
    "acad": "2030-31",
    "source": "projected",
@@ -1560,7 +1560,7 @@
   {
    "start": 1947542400000,
    "end": 1947542400000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 19",
    "acad": "2031-32",
    "source": "projected",
@@ -1686,7 +1686,7 @@
   {
    "start": 1959638400000,
    "end": 1959638400000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 6",
    "acad": "2031-32",
    "source": "projected",
@@ -1758,7 +1758,7 @@
   {
    "start": 1970524800000,
    "end": 1970524800000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 11",
    "acad": "2031-32",
    "source": "projected",
@@ -1812,7 +1812,7 @@
   {
    "start": 1978992000000,
    "end": 1978992000000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 17",
    "acad": "2032-33",
    "source": "projected",
@@ -1938,7 +1938,7 @@
   {
    "start": 1991088000000,
    "end": 1991088000000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 4",
    "acad": "2032-33",
    "source": "projected",
@@ -2010,7 +2010,7 @@
   {
    "start": 2001974400000,
    "end": 2001974400000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 10",
    "acad": "2032-33",
    "source": "projected",
@@ -2064,7 +2064,7 @@
   {
    "start": 2010441600000,
    "end": 2010441600000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 16",
    "acad": "2033-34",
    "source": "projected",
@@ -2190,7 +2190,7 @@
   {
    "start": 2022537600000,
    "end": 2022537600000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 3",
    "acad": "2033-34",
    "source": "projected",
@@ -2262,7 +2262,7 @@
   {
    "start": 2033424000000,
    "end": 2033424000000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 9",
    "acad": "2033-34",
    "source": "projected",
@@ -2316,7 +2316,7 @@
   {
    "start": 2041891200000,
    "end": 2041891200000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 15",
    "acad": "2034-35",
    "source": "projected",
@@ -2433,7 +2433,7 @@
   {
    "start": 2053987200000,
    "end": 2053987200000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 2",
    "acad": "2034-35",
    "source": "projected",
@@ -2505,7 +2505,7 @@
   {
    "start": 2064873600000,
    "end": 2064873600000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 8",
    "acad": "2034-35",
    "source": "projected",
@@ -2559,7 +2559,7 @@
   {
    "start": 2073340800000,
    "end": 2073340800000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 14",
    "acad": "2035-36",
    "source": "projected",
@@ -2685,7 +2685,7 @@
   {
    "start": 2086041600000,
    "end": 2086041600000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 8",
    "acad": "2035-36",
    "source": "projected",
@@ -2757,7 +2757,7 @@
   {
    "start": 2096928000000,
    "end": 2096928000000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 13",
    "acad": "2035-36",
    "source": "projected",
@@ -2811,7 +2811,7 @@
   {
    "start": 2104790400000,
    "end": 2104790400000,
-   "name": "Last day to apply to graduate/declare candidacy for winter commencement",
+   "name": "Last day to apply to graduate/declare candidacy for winter degree conferral",
    "dateText": "Sept. 12",
    "acad": "2036-37",
    "source": "projected",
@@ -2937,7 +2937,7 @@
   {
    "start": 2117491200000,
    "end": 2117491200000,
-   "name": "Last day to apply to graduate/declare candidacy for spring commencement",
+   "name": "Last day to apply to graduate/declare candidacy for spring degree conferral",
    "dateText": "Feb. 6",
    "acad": "2036-37",
    "source": "projected",
@@ -3009,7 +3009,7 @@
   {
    "start": 2128377600000,
    "end": 2128377600000,
-   "name": "Last day to apply to graduate/declare candidacy for summer commencement",
+   "name": "Last day to apply to graduate/declare candidacy for summer degree conferral",
    "dateText": "June 12",
    "acad": "2036-37",
    "source": "projected",

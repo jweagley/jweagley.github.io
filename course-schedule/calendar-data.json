@@ -1,6 +1,6 @@
 {
  "modified": {
-  "official": "2026-11-18",
+  "official": "2026-11-24",
   "archived": "2026-09-29",
   "projected": "2026-11-18"
  },
@@ -487,10 +487,10 @@
    "priority": 3
   },
   {
-   "start": 1810252800000,
-   "end": 1810425600000,
+   "start": 1810166400000,
+   "end": 1810339200000,
    "name": "Spring commencement",
-   "dateText": "May 14-16",
+   "dateText": "May 13-15",
    "acad": "2026-27",
    "source": "official",
    "priority": 3
@@ -730,10 +730,10 @@
    "priority": 3
   },
   {
-   "start": 1841702400000,
-   "end": 1841875200000,
+   "start": 1841788800000,
+   "end": 1841961600000,
    "name": "Spring commencement",
-   "dateText": "May 12-14",
+   "dateText": "May 13-15",
    "acad": "2027-28",
    "source": "official",
    "priority": 3
